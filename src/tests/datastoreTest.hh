@@ -11,31 +11,13 @@ final class softwareTest extends \PHPUnit_Framework_TestCase {
 
 
     private function generateUuid() {
-
-        return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-            // 32 bits for "time_low"
-            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
-
-            // 16 bits for "time_mid"
-            mt_rand( 0, 0xffff ),
-
-            // 16 bits for "time_hi_and_version",
-            // four most significant bits holds version number 4
-            mt_rand( 0, 0x0fff ) | 0x4000,
-
-            // 16 bits, 8 bits for "clk_seq_hi_res",
-            // 8 bits for "clk_seq_low",
-            // two most significant bits holds zero and one for variant DCE1.1
-            mt_rand( 0, 0x3fff ) | 0x8000,
-
-            // 48 bits for "node"
-            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
-        );
+        include_once('src/shared/logics/uuid.hh');
+        return generateUuid();
     }
 
     private function executeCurlRequest(string $host, string $httpMethod, string $uri, array $data = null) {
 
-        include_once('src/softwares/datastore/apis/logics/curl/execute.hh');
+        include_once('src/shared/logics/curl/execute.hh');
 
         $params = Map<string, string> {
             'host' => $host,
@@ -125,7 +107,7 @@ final class softwareTest extends \PHPUnit_Framework_TestCase {
                             'port' => 80
                         ),
                         'function' => array(
-                            'url' => 'http://code.irestful.com/softwares/datastore/apis/validators/uuid.hh',
+                            'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
                             'name' => 'uuid',
                             'language' => 'hack'
                         )
@@ -141,7 +123,7 @@ final class softwareTest extends \PHPUnit_Framework_TestCase {
                             'port' => 80
                         ),
                         'function' => array(
-                            'url' => 'http://code.irestful.com/softwares/category/apis/validators/slug.hh',
+                            'url' => 'http://code.irestful.com/shared/validators/slug.hh',
                             'name' => 'slug',
                             'language' => 'hack'
                         )

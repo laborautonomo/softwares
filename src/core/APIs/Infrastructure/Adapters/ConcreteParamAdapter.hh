@@ -29,7 +29,7 @@ final class ConcreteParamAdapter implements ParamAdapter {
                     $output[$keyname] = $this->convertStringToParam($value);
                     continue;
                 }
-                
+
                 $output[$keyname] = $this->convertDataToParam($value);
 
 

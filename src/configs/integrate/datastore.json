@@ -5,7 +5,7 @@
     },
     "functions": {
         "curl_execute": {
-            "url": "http://code.irestful.com/softwares/datastore/apis/logics/curl/execute.hh",
+            "url": "http://code.irestful.com/shared/logics/curl/execute.hh",
             "name": "execute",
             "language": "hack"
         },

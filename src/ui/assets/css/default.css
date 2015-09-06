@@ -1,0 +1,47 @@
+body {background-color: #ffffff; font-family: 'Ubuntu', sans-serif; font-size: 14px; color: #333333; line-height: 200%; margin: 0; padding: 0; }
+
+.clearboth {clear: both; height: 1px;}
+h2 {font-size: 30px;}
+h3 {font-size: 22px;}
+
+header {margin: 0; padding: 0; background-color: #ffffff;}
+header #logo {padding: 50px;}
+header #logo a {display: block; width: 400px; height: 126px; background-image: url('../images/irestful-long-logo.png'); background-repeat: no-repeat; margin: 0px auto 0px auto;}
+header #logo a span {display: none;}
+
+
+
+#heading {background: url('../photos/DSC_5403.jpg') no-repeat top center; background-size: cover; font-size: 35px; line-height: 200%; font-family: 'Bubblegum Sans', cursive; color: #ffffff; text-align: center;}
+#heading .inner {max-width: 700px; margin: 0px auto 0px auto; padding: 75px 0px 75px 0px;  }
+
+#main {max-width: 700px; margin: 50px auto 50px auto;}
+#main figure {border: 2px solid #155c94; margin: 0; padding: 0;}
+#main figure img {max-width: 100%; }
+#main figure figcaption {font-size: 13px; background-color: #d1dfea; padding: 10px; line-height: 150%;}
+
+#main section section {border-left: 10px solid #d1dfea; padding-left: 10px;}
+
+#main .gist-data {max-height: 500px;}
+
+aside {bottom: 0; left: 0; overflow-x: hidden; overflow-y: auto; position: fixed; top: 0; z-index: 10;}
+aside #closemainmenu {width: 400px; color: #ffffff; margin-left: -315px;}
+
+aside #menu-trigger { padding: 20px; z-index: 2; position: relative; }
+aside #menu-trigger a {background-image: url('../images/menu-icon-top.png'); background-repeat: no-repeat; width: 48px; height: 48px; display: block; float: right;}
+aside #menu-trigger a span {display: none;}
+aside #menu-trigger .close {background-image: url('../images/menu-icon-top-normal.png'); display: none;}
+
+aside nav {background-color: #155c94; margin-top: -90px; padding: 110px 20px 20px 20px; height: 100%; opacity: 0.2; position: relative;  border-right: 5px solid #15b192; z-index: 1; border-bottom-right-radius: 20px;}
+aside nav a {color: #ffffff; }
+aside nav a:hover {color: #15b192;}
+aside nav ul { list-style: none; }
+
+aside:target #closemainmenu {margin-left: 0px; transition:all 1s ease;}
+aside:target #closemainmenu #menu-trigger .open {display: none; transition:all 1s ease;}
+aside:target #closemainmenu #menu-trigger .close {display: block; transition:all 1s ease;}
+aside:target #closemainmenu nav {opacity: 1; transition:all 1s ease;}
+
+aside #closemainmenu:target {margin-left: -315px; transition:all 1s ease;}
+aside #closemainmenu:target #menu-trigger .open {display: block; transition:all 1s ease;}
+aside #closemainmenu:target #menu-trigger .close {display: none; transition:all 1s ease;}
+aside #closemainmenu:target nav {opacity: 0.2; transition:all 1s ease;}

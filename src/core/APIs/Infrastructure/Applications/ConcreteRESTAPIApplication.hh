@@ -363,10 +363,6 @@ final class ConcreteRESTAPIApplication implements RESTAPIApplication {
             $newParam = $createParam($content, $renderedParser);
 
             if ($httpCode != 200) {
-
-                print_r(array($results['http_queries'][$paramHash]));
-                die();
-
                 throw new \Exception('There was a problem when executing an input validator.  It returned this http code: '.$httpCode.'.  Its content was: '.$content);
             }
 

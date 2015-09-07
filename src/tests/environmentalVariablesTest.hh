@@ -46,7 +46,7 @@ final class environmentVariablesTest extends \PHPUnit_Framework_TestCase {
                         )
                     )
                 ),
-                'name' => array(
+                'keyname' => array(
                     'type' => 'varchar',
                     'is_unique' => true,
                     'length' => 255,
@@ -58,18 +58,30 @@ final class environmentVariablesTest extends \PHPUnit_Framework_TestCase {
                             'port' => 80
                         ),
                         'function' => array(
-                            'url' => 'http://code.irestful.com/softwares/settings/apis/validators/name.hh',
-                            'name' => 'name',
+                            'url' => 'http://code.irestful.com/softwares/apis/irestful/shared/validators/keyname.hh',
+                            'name' => 'keyname',
                             'language' => 'hack'
                         )
                     )
                 ),
-                'title' => array(
+                'variable_name' => array(
                     'type' => 'varchar',
                     'length' => 255,
-                    'default' => 'not null'
+                    'default' => 'not null',
+                    'validator' => array(
+                        'language' => array(
+                            'name' => 'hack',
+                            'host' => 'http://hack.languages.irestful.com',
+                            'port' => 80
+                        ),
+                        'function' => array(
+                            'url' => 'http://code.irestful.com/softwares/apis/irestful/environment_variables/validators/variable_name.hh',
+                            'name' => 'variableName',
+                            'language' => 'hack'
+                        )
+                    )
                 ),
-                'description' => array(
+                'notes' => array(
                     'type' => 'text',
                     'default' => 'null'
                 ),
@@ -91,9 +103,9 @@ final class environmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         return array(
             'uuid' => generateUuid(),
-            'name' => 'my-new-software',
-            'title' => 'This is the title',
-            'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'keyname' => 'apis_irestful_software_name',
+            'variable_name' => 'APIS_IRESTFUL_SOFTWARE_NAME',
+            'notes' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
             'created_on' => time()
         );
 
@@ -103,9 +115,9 @@ final class environmentVariablesTest extends \PHPUnit_Framework_TestCase {
 
         return array(
             'uuid' => generateUuid(),
-            'name' => 'second-software',
-            'title' => 'This is a second title',
-            'description' => 'Just another description!',
+            'keyname' => 'second_apis_irestful_software_name',
+            'variable_name' => 'SECOND_APIS_IRESTFUL_SOFTWARE_NAME',
+            'notes' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
             'created_on' => time()
         );
 

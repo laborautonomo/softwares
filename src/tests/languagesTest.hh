@@ -2,7 +2,7 @@
 include_once('src/shared/logics/uuid.hh');
 include_once('src/tests/helpers/crud.hh');
 
-final class settingsTest extends \PHPUnit_Framework_TestCase {
+final class languagesTest extends \PHPUnit_Framework_TestCase {
 
     private $softwareNameInDatastore;
     private $newSoftwareConfigUrl;
@@ -13,7 +13,7 @@ final class settingsTest extends \PHPUnit_Framework_TestCase {
     public function setUp() {
 
         $this->softwareNameInDatastore = 'apis_irestful';
-        $this->newSoftwareConfigUrl = 'http://code.irestful.com/configs/softwares/apis/settings.json';
+        $this->newSoftwareConfigUrl = 'http://code.irestful.com/configs/softwares/apis/languages.json';
         $this->datastoreConfigUrl = 'http://code.irestful.com/configs/softwares/apis/datastore.json';
         $this->containerData = $this->getContainerData();
         $this->firstData = $this->getFirstData();
@@ -26,7 +26,7 @@ final class settingsTest extends \PHPUnit_Framework_TestCase {
 
     private function getContainerData() {
         return array(
-            'name' => 'settings',
+            'name' => 'languages',
             'fields' => array(
                 'uuid' => array(
                     'is_primary_key' => true,
@@ -46,7 +46,7 @@ final class settingsTest extends \PHPUnit_Framework_TestCase {
                         )
                     )
                 ),
-                'name' => array(
+                'keyname' => array(
                     'type' => 'varchar',
                     'is_unique' => true,
                     'length' => 255,
@@ -58,8 +58,42 @@ final class settingsTest extends \PHPUnit_Framework_TestCase {
                             'port' => 80
                         ),
                         'function' => array(
-                            'url' => 'http://code.irestful.com/softwares/apis/irestful/settings/validators/name.hh',
-                            'name' => 'name',
+                            'url' => 'http://code.irestful.com/softwares/apis/irestful/shared/validators/keyname.hh',
+                            'name' => 'keyname',
+                            'language' => 'hack'
+                        )
+                    )
+                ),
+                'host' => array(
+                    'type' => 'varchar',
+                    'length' => 255,
+                    'default' => 'not null',
+                    'validator' => array(
+                        'language' => array(
+                            'name' => 'hack',
+                            'host' => 'http://hack.languages.irestful.com',
+                            'port' => 80
+                        ),
+                        'function' => array(
+                            'url' => 'http://code.irestful.com/softwares/apis/irestful/shared/validators/url.hh',
+                            'name' => 'url',
+                            'language' => 'hack'
+                        )
+                    )
+                ),
+                'port' => array(
+                    'type' => 'int',
+                    'length' => 11,
+                    'default' => 'not null',
+                    'validator' => array(
+                        'language' => array(
+                            'name' => 'hack',
+                            'host' => 'http://hack.languages.irestful.com',
+                            'port' => 80
+                        ),
+                        'function' => array(
+                            'url' => 'http://code.irestful.com/shared/validators/integer.hh',
+                            'name' => 'integer',
                             'language' => 'hack'
                         )
                     )
@@ -71,7 +105,7 @@ final class settingsTest extends \PHPUnit_Framework_TestCase {
                 ),
                 'description' => array(
                     'type' => 'text',
-                    'default' => 'null'
+                    'default' => 'not null'
                 ),
                 'created_on' => array(
                     'type' => 'bigint',
@@ -91,9 +125,11 @@ final class settingsTest extends \PHPUnit_Framework_TestCase {
 
         return array(
             'uuid' => generateUuid(),
-            'name' => 'my-new-software',
-            'title' => 'This is the title',
-            'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'keyname' => 'langauge_name',
+            'host' => 'http://my-language.languages.irestful.com',
+            'port' => 80,
+            'title' => 'This is the "Language Name" Language Processor.',
+            'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
             'created_on' => time()
         );
 
@@ -103,9 +139,11 @@ final class settingsTest extends \PHPUnit_Framework_TestCase {
 
         return array(
             'uuid' => generateUuid(),
-            'name' => 'second-software',
-            'title' => 'This is a second title',
-            'description' => 'Just another description!',
+            'keyname' => 'second_langauge_name',
+            'host' => 'http://second-language.languages.irestful.com',
+            'port' => 80,
+            'title' => 'This is the "Second Language Name" Language Processor.',
+            'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
             'created_on' => time()
         );
 

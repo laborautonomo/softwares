@@ -111,6 +111,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     mkdir /vagrant/bin/softwares/bin;
     mkdir /vagrant/bin/softwares/wildcard;
     mkdir /vagrant/bin/softwares/wildcard/bin;
+    mkdir /vagrant/bin/softwares/wildcard/cache;
     mkdir /vagrant/bin/languages;
     mkdir /vagrant/bin/languages/hack;
     mkdir /vagrant/bin/languages/hack/bin;
@@ -129,6 +130,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sudo echo "127.0.0.1 apis-irestful-settings.softwares.irestful.com" >> /etc/hosts
     sudo echo "127.0.0.1 apis-irestful-environment-variables.softwares.irestful.com" >> /etc/hosts
     sudo echo "127.0.0.1 apis-irestful-languages.softwares.irestful.com" >> /etc/hosts
+    sudo echo "127.0.0.1 apis-irestful-functions.softwares.irestful.com" >> /etc/hosts
 
     #execute the tests:
     cd /vagrant; sudo hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false -v Repo.Central.Path=/var/tmp /vagrant/composer.phar dump-autoload --optimize;

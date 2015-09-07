@@ -32,7 +32,6 @@ function insertElement(Map<string, string> $params = null, Map<string, \Closure>
     unset($params['container_name']);
 
     $output = $subLogics['execute']($params);
-
     if ($output['http_code'] != 200) {
         throw new \Exception($output['content'], $output['http_code']);
     }

@@ -1,0 +1,9 @@
+{
+    "name": "apis-irestful-functions",
+    "parents": [
+        "http://code.irestful.com/configs/parent/crud.json"
+    ],
+    "environment_variables": {
+        "container_name": "FUNCTIONS_CONTAINER_NAME"
+    }
+}

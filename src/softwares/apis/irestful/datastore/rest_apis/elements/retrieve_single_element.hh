@@ -24,7 +24,6 @@ function retrieveSingleElement(Map<string, string> $params = null, Map<string, \
     };
 
     $data = $subLogics['retrieve_one']($retrieveParams);
-
     if (!isset($data['uuid'])) {
         throw new \Exception('The requested element (uuid: '.$params['uuid'].') could not be found.', 404);
     }

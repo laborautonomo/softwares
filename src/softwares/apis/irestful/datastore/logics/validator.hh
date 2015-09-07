@@ -2,8 +2,6 @@
 
 function validator(Map<string, string> $params = null, Map<string, \Closure> $subLogics = null) {
 
-
-
     if (!isset($subLogics['curl_execute'])) {
         throw new \Exception('The curl_execute subLogic is mandatory in order to execute the validator.', 500);
     }
@@ -12,6 +10,11 @@ function validator(Map<string, string> $params = null, Map<string, \Closure> $su
         throw new \Exception('The validators param is mandatory in order to execute the validator.', 500);
     }
 
+    if (!isset($params['cache_path'])) {
+        throw new \Exception('The cache_path param is mandatory in order to execute the validator.', 500);
+    }
+
+    $renderedParsers = Map<string, mixed> {};
     $queries = Map<string, Map<string, mixed>> {};
     foreach($params['validators'] as $keyname => $oneValidator) {
 
@@ -29,6 +32,14 @@ function validator(Map<string, string> $params = null, Map<string, \Closure> $su
 
         if (!isset($oneValidator['validator']['function']['url'])) {
             throw new \Exception('The validators[i]->validator->function->url param is mandatory in order to execute the validator.', 500);
+        }
+
+        if (isset($oneValidator['validator']['rendered_parser']['url']) && isset($oneValidator['validator']['rendered_parser']['name'])) {
+            $renderedParsers[$keyname] = Map<string, string> {
+                'url' => $oneValidator['validator']['rendered_parser']['url'],
+                'name' => $oneValidator['validator']['rendered_parser']['name'],
+                'validator_url' => $oneValidator['validator']['function']['url']
+            };
         }
 
         if (!isset($oneValidator['value'])) {
@@ -54,6 +65,28 @@ function validator(Map<string, string> $params = null, Map<string, \Closure> $su
         'queries' => $queries
     };
 
-    return $subLogics['curl_execute']($curlParams);
+    $output = $subLogics['curl_execute']($curlParams);
+    if (empty($renderedParsers)) {
+        return $output;
+    }
+
+    foreach($renderedParsers as $keyname => $oneRenderedParser) {
+
+        $code = @file_get_contents($oneRenderedParser['url']);
+        $fileName = md5($code).'.hh';
+        $filePath = $params['cache_path'].$fileName;
+
+        file_put_contents($filePath, $code);
+        include_once($filePath);
+        unlink($filePath);
+
+        if ($output[$keyname]['http_code'] != 200) {
+            throw new \Exception('The field ('.$keyname.') was supposed to be parsed using the rendered_parser (url: '.$oneRenderedParser['url'].').  However, its validator (url: '.$oneRenderedParser['validator_url'].') returned an http_code of: '.$output[$keyname]['http_code']);
+        }
+
+        $output[$keyname]['content'] = $oneRenderedParser['name']($output[$keyname]['content']);
+    }
+
+    return $output;
 
 };

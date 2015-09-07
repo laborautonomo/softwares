@@ -245,6 +245,9 @@
         },
         "validator": {
             "function": "validator",
+            "params": {
+                "cache_path": "../cache"
+            },
             "sub_logics": {
                 "curl_execute": "curl_execute_multiple"
             }

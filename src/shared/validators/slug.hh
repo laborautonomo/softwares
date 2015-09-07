@@ -8,5 +8,5 @@ function slug(string $slug) {
         return strtolower($matches[0][0]);
     }
 
-    throw new \Exception('The given input ('.$slug.') is not a valid uuid.', 500);
+    throw new \Exception('The given input ('.$slug.') is not a valid slug.', 500);
 };

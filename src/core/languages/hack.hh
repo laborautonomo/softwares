@@ -53,24 +53,18 @@ set_exception_handler("handleExceptions");
 
 $cachePath = '../cache';
 
-$generateRandomFunctionName = function($length = 25) {
-    $characters = 'abcdefghijklmnopqrstuvwxyz';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-};
+$includeCode = function(string $name, string $code) use($cachePath) {
 
-$includeCode = function(string $name, string $code) use($cachePath, $generateRandomFunctionName) {
+    if (function_exists($name)) {
+        return $name;
+    }
 
     $hash = md5($code);
     $fileName = $cachePath.'/'.$hash.'.hh';
 
     file_put_contents($fileName, $code);
-    include($fileName);
-    unlink($fileName);
+    include_once($fileName);
+    //unlink($fileName);
 
     return $name;
 

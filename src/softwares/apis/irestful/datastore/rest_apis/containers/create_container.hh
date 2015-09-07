@@ -131,15 +131,15 @@ function createContainer(Map<string, string> $params = null, Map<string, \Closur
 
     foreach($foreignKeys as $fieldName => $oneData) {
 
-        if (!isset($oneData['referenced_table']) || empty($oneData['referenced_table'])) {
-            throw new \Exception('The referenced_table index must be defined in the foreign_key data.');
+        if (!isset($oneData['referenced_container']) || empty($oneData['referenced_container'])) {
+            throw new \Exception('The referenced_container index must be defined in the foreign_key data.');
         }
 
         if (!isset($oneData['referenced_field']) || empty($oneData['referenced_field'])) {
             throw new \Exception('The referenced_field index must be defined in the foreign_key data.');
         }
 
-        $lines[] = 'constraint fk_'.$params['container_name'].'___'.$fieldName.' foreign key ('.$oneData['referenced_table'].') references '.$oneData['referenced_table'].' ('.$oneData['referenced_field'].')';
+        $lines[] = 'constraint fk_'.$params['container_name'].'___'.$fieldName.' foreign key ('.$fieldName.') references '.$oneData['referenced_container'].' ('.$oneData['referenced_field'].')';
 
     }
 

@@ -45,21 +45,17 @@ function createElement(Map<string, string> $params = null, Map<string, \Closure>
     $validatorParams = Map<string, Map<string, Map<string, string>>> {
         'validators' => $validators
     };
-    $output = $subLogics['validator']($validatorParams);
 
+    $output = $subLogics['validator']($validatorParams);
     foreach($output as $keyname => $oneOutput) {
 
         if ($oneOutput['http_code'] != 200) {
             throw new \Exception('The field ('.$keyname.') was not able to validate.  The returned http_code was: '.$oneOutput['http_code'].'.  The content was: '.$oneOutput['content']);
         }
 
-        if ($oneOutput['content'] != $validators[$keyname]['value']) {
-            throw new \Exception('The field () did not validate.  The input was: '.$validators[$keyname]['value'].'.  The output was: '.$oneOutput['content']);
-        }
-
+        //assigned the validated data to the params:
+        $params['data'][$keyname] = $oneOutput['content'];
     }
-
-    $input['uuid'] = hex2bin(str_replace('-', '', $input['uuid']));
 
     $fields = array_keys($input);
     $variables = array();

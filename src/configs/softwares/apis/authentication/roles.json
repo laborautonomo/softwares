@@ -1,21 +1,17 @@
 {
-    "name": "apis-irestful-logics",
+    "name": "apis-irestful-roles",
     "parents": [
         "http://code.irestful.com/configs/parent/crud.json"
     ],
     "environment_variables": {
-        "container_name": "LOGICS_CONTAINER_NAME"
+        "container_name": "ROLES_CONTAINER_NAME"
     },
     "rest_apis": {
         "insert_middle_elements": {
             "params": {
                 "foreign_keys": {
-                    "sub_logics": {
-                        "middle_container": "logics_sub_logic",
-                        "parent_field": "uuid"
-                    },
-                    "params": {
-                        "middle_container": "logics_params",
+                    "permissions": {
+                        "middle_container": "roles_permissions",
                         "parent_field": "uuid"
                     }
                 }

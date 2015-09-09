@@ -1,6 +1,69 @@
 <?hh
 include_once('src/shared/logics/uuid.hh');
 
+function getRolesData($index, array $permissions = null) {
+
+    if (!empty($permissions)) {
+
+        $permissionUuids = array();
+        foreach($permissions as $onePermission) {
+            $permissionUuids[] = $onePermission['uuid'];
+        }
+
+    }
+
+    if ($index % 2) {
+
+        $data = array(
+            'uuid' => generateUuid(),
+            'title' => 'This is the first role.',
+            'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+        if (!empty($permissionUuids)) {
+            $data['permissions'] = $permissionUuids;
+        }
+
+        return $data;
+
+    }
+
+    $data = array(
+        'uuid' => generateUuid(),
+        'title' => 'This is the second role.',
+        'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+
+    if (!empty($permissionUuids)) {
+        $data['permissions'] = $permissionUuids;
+    }
+
+    return $data;
+}
+
+function getPermissionData($index) {
+
+    if ($index % 2) {
+
+        return array(
+            'uuid' => generateUuid(),
+            'title' => 'This is the first permission.',
+            'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+    }
+
+    return array(
+        'uuid' => generateUuid(),
+        'title' => 'This is the second permission.',
+        'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+}
+
 function getApplicationData($index, array $routes = null, array $parentApplications = null) {
 
     $routeUuids = null;

@@ -143,6 +143,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sudo echo "127.0.0.1 apis-irestful-http-routes.softwares.irestful.com" >> /etc/hosts
     sudo echo "127.0.0.1 apis-irestful-routes.softwares.irestful.com" >> /etc/hosts
     sudo echo "127.0.0.1 apis-irestful-applications.softwares.irestful.com" >> /etc/hosts
+    sudo echo "127.0.0.1 apis-irestful-permissions.softwares.irestful.com" >> /etc/hosts
+    sudo echo "127.0.0.1 apis-irestful-roles.softwares.irestful.com" >> /etc/hosts
 
     #execute the tests:
     cd /vagrant; sudo hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false -v Repo.Central.Path=/var/tmp /vagrant/composer.phar dump-autoload --optimize;

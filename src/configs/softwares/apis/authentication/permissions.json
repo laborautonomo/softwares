@@ -1,0 +1,28 @@
+{
+    "name": "apis-irestful-permissions",
+    "parents": [
+        "http://code.irestful.com/configs/parent/crud.json"
+    ],
+    "environment_variables": {
+        "container_name": "PERMISSIONS_CONTAINER_NAME"
+    },
+    "routes": {
+        "http": [
+            {
+                "pattern": "/",
+                "method": "post",
+                "rest_api": "insert_element"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "get",
+                "rest_api": "retrieve_element_by_uuid"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "delete",
+                "rest_api": "delete_element"
+            }
+        ]
+    }
+}

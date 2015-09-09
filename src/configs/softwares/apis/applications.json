@@ -1,0 +1,60 @@
+{
+    "name": "apis-irestful-applications",
+    "parents": [
+        "http://code.irestful.com/configs/parent/crud.json"
+    ],
+    "environment_variables": {
+        "container_name": "APPLICATION_CONTAINER_NAME"
+    },
+    "functions": {
+        "validator_software_name": {
+            "url": "http://code.irestful.com/shared/validators/software_name.hh",
+            "name": "softwareName",
+            "language": "hack"
+        }
+    },
+    "validators": {
+        "software_name": {
+            "function": "validator_software_name"
+        }
+    },
+    "rest_apis": {
+        "insert_middle_elements": {
+            "params": {
+                "foreign_keys": {
+                    "routes": {
+                        "middle_container": "applications_routes",
+                        "parent_field": "uuid"
+                    },
+                    "parent_applications": {
+                        "middle_container": "applications_parent_applications",
+                        "parent_field": "uuid"
+                    }
+                },
+                "name": {
+                    "input": "*request->request->name*",
+                    "validator": "software_name"
+                }
+            }
+        }
+    },
+    "routes": {
+        "http": [
+            {
+                "pattern": "/",
+                "method": "post",
+                "rest_api": "insert_middle_elements"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "get",
+                "rest_api": "retrieve_element_by_uuid"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "delete",
+                "rest_api": "delete_element"
+            }
+        ]
+    }
+}

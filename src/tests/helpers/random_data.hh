@@ -1,6 +1,87 @@
 <?hh
 include_once('src/shared/logics/uuid.hh');
 
+function getApplicationData($index, array $routes = null, array $parentApplications = null) {
+
+    $routeUuids = null;
+    if (!empty($routes)) {
+        foreach($routes as $oneRoute) {
+            $routeUuids[] = $oneRoute['uuid'];
+        }
+
+    }
+
+    $parentApplicationsUuid = null;
+    if (!empty($parentApplications)) {
+        foreach($parentApplications as $oneApplication) {
+            $parentApplicationsUuid[] = $oneApplication['uuid'];
+        }
+
+    }
+
+    if ($index % 3) {
+
+        $data = array(
+            'uuid' => generateUuid(),
+            'name' => 'my-third-name',
+            'title' => 'This is the third application.',
+            'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+        if (!empty($routeUuids)) {
+            $data['routes'] = $routeUuids;
+        }
+
+        if (!empty($parentApplicationsUuid)) {
+            $data['parent_applications'] = $parentApplicationsUuid;
+        }
+
+        return $data;
+
+    }
+
+    if ($index % 2) {
+
+        $data = array(
+            'uuid' => generateUuid(),
+            'name' => 'my-name',
+            'title' => 'This is the first application.',
+            'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+        if (!empty($routeUuids)) {
+            $data['routes'] = $routeUuids;
+        }
+
+        if (!empty($parentApplicationsUuid)) {
+            $data['parent_applications'] = $parentApplicationsUuid;
+        }
+
+        return $data;
+
+    }
+
+    $data = array(
+        'uuid' => generateUuid(),
+        'name' => 'my-second-name',
+        'title' => 'This is the second application.',
+        'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+
+    if (!empty($routeUuids)) {
+        $data['routes'] = $routeUuids;
+    }
+
+    if (!empty($parentApplicationsUuid)) {
+        $data['parent_applications'] = $parentApplicationsUuid;
+    }
+
+    return $data;
+}
+
 function getRouteData($index, array $cliRoute = null, array $httpRoute = null) {
 
     if ($index % 2) {

@@ -1,4 +1,229 @@
 <?hh
+function getApplicationsRoutes() {
+    return array(
+        'name' => 'applications_routes',
+        'fields' => array(
+            'uuid' => array(
+                'is_primary_key' => true,
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'parent' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'applications',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'child' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'routes',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'created_on' => array(
+                'type' => 'bigint',
+                'length' => 11,
+                'default' => 'not null'
+            )
+        )
+    );
+}
+
+function getApplicationsParentApplications() {
+    return array(
+        'name' => 'applications_parent_applications',
+        'fields' => array(
+            'uuid' => array(
+                'is_primary_key' => true,
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'parent' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'applications',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'child' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'applications',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'created_on' => array(
+                'type' => 'bigint',
+                'length' => 11,
+                'default' => 'not null'
+            )
+        )
+    );
+}
+
+function getApplicationContainerData() {
+    return array(
+        'name' => 'applications',
+        'fields' => array(
+            'uuid' => array(
+                'is_primary_key' => true,
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'name' => array(
+                'type' => 'varchar',
+                'is_unique' => true,
+                'length' => 255,
+                'default' => 'not null'
+            ),
+            'title' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'default' => 'not null'
+            ),
+            'description' => array(
+                'type' => 'text',
+                'default' => 'null'
+            ),
+            'created_on' => array(
+                'type' => 'bigint',
+                'length' => 11,
+                'default' => 'not null'
+            ),
+            'last_updated_on' => array(
+                'type' => 'bigint',
+                'length' => 11,
+                'default' => 'null'
+            )
+        )
+    );
+}
+
 function getRoutesContainerData() {
     return array(
         'name' => 'routes',

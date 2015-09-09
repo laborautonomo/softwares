@@ -1,0 +1,47 @@
+{
+    "name": "apis-irestful-http-routes",
+    "parents": [
+        "http://code.irestful.com/configs/parent/crud.json"
+    ],
+    "environment_variables": {
+        "container_name": "HTTP_ROUTES_CONTAINER_NAME"
+    },
+    "functions": {
+        "insert_http_routes": {
+            "url": "http://code.irestful.com/softwares/apis/irestful/http_routes/rest_apis/create_http_routes.hh",
+            "name": "createHttpRoutes",
+            "language": "hack"
+        }
+    },
+    "rest_apis": {
+        "insert_http_routes": {
+            "function": "insert_http_routes",
+            "params": {
+                "possible_params": ["get", "post", "put", "delete", "patch"],
+                "data": "*request->request*"
+            },
+            "sub_logics": {
+                "insert_element": "insert_element"
+            }
+        }
+    },
+    "routes": {
+        "http": [
+            {
+                "pattern": "/",
+                "method": "post",
+                "rest_api": "insert_http_routes"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "get",
+                "rest_api": "retrieve_element_by_uuid"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "delete",
+                "rest_api": "delete_element"
+            }
+        ]
+    }
+}

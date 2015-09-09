@@ -1,0 +1,46 @@
+{
+    "name": "apis-irestful-cli-routes",
+    "parents": [
+        "http://code.irestful.com/configs/parent/crud.json"
+    ],
+    "environment_variables": {
+        "container_name": "CLI_ROUTES_CONTAINER_NAME"
+    },
+    "functions": {
+        "insert_cli_routes": {
+            "url": "http://code.irestful.com/softwares/apis/irestful/cli_routes/rest_apis/create_cli_routes.hh",
+            "name": "createCliRoutes",
+            "language": "hack"
+        }
+    },
+    "rest_apis": {
+        "insert_cli_routes": {
+            "function": "insert_cli_routes",
+            "params": {
+                "data": "*request->request*"
+            },
+            "sub_logics": {
+                "insert_element": "insert_element"
+            }
+        }
+    },
+    "routes": {
+        "http": [
+            {
+                "pattern": "/",
+                "method": "post",
+                "rest_api": "insert_cli_routes"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "get",
+                "rest_api": "retrieve_element_by_uuid"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "delete",
+                "rest_api": "delete_element"
+            }
+        ]
+    }
+}

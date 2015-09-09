@@ -1,6 +1,109 @@
 <?hh
 include_once('src/shared/logics/uuid.hh');
 
+function getRouteData($index, array $cliRoute = null, array $httpRoute = null) {
+
+    if ($index % 2) {
+
+        $data = array(
+            'uuid' => generateUuid(),
+            'cli_route' => null,
+            'http_route' => null,
+            'title' => 'This is the first route.',
+            'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+        if (!empty($cliRoute)) {
+            $data['cli_route'] = $cliRoute['uuid'];
+        }
+
+        if (!empty($httpRoute)) {
+            $data['http_route'] = $httpRoute['uuid'];
+        }
+
+        return $data;
+
+    }
+
+    $data = array(
+        'uuid' => generateUuid(),
+        'cli_route' => null,
+        'http_route' => null,
+        'title' => 'This is the second route.',
+        'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+
+    if (!empty($cliRoute)) {
+        $data['cli_route'] = $cliRoute['uuid'];
+    }
+
+    if (!empty($httpRoute)) {
+        $data['http_route'] = $httpRoute['uuid'];
+    }
+
+    return $data;
+}
+
+function getHttpRouteData(array $restAPIData, $index) {
+
+    if ($index % 2) {
+
+        return array(
+            'uuid' => generateUuid(),
+            'method' => 'get',
+            'pattern' => 'this is a pattern',
+            'pattern_prefix' => '*',
+            'pattern_suffix' => '*',
+            'rest_api' => $restAPIData['uuid'],
+            'title' => 'This is the first http route.',
+            'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+    }
+
+    return array(
+        'uuid' => generateUuid(),
+        'method' => 'post',
+        'pattern' => 'this is a second pattern',
+        'pattern_prefix' => '+',
+        'pattern_suffix' => '+',
+        'rest_api' => $restAPIData['uuid'],
+        'title' => 'This is the second http route.',
+        'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+}
+
+function getCliRouteData(array $restAPIData, $index) {
+
+    if ($index % 2) {
+
+        return array(
+            'uuid' => generateUuid(),
+            'optional_params' => 'first,second,third',
+            'mandatory_params' => 'another,yes',
+            'rest_api' => $restAPIData['uuid'],
+            'title' => 'This is the first cli route.',
+            'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+    }
+
+    return array(
+        'uuid' => generateUuid(),
+        'optional_params' => 'first,second,third',
+        'mandatory_params' => 'another,yes',
+        'rest_api' => $restAPIData['uuid'],
+        'title' => 'This is the second cli route.',
+        'description' => 'Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+}
+
 function getRESTAPIsData(array $functionsData, $index, array $successAPI = null, array $failureAPI = null, array $view = null, array $renderedParser = null, array $params = null, array $subRestAPIs = null, array $subLogics = null) {
 
     $paramUuids = array();

@@ -1,17 +1,29 @@
 {
-    "name": "apis-irestful-environment-variables",
+    "name": "apis-irestful-validators",
     "parents": [
         "http://code.irestful.com/configs/parent/crud.json"
     ],
     "environment_variables": {
-        "container_name": "ENVIRONMENT_VARIABLES_CONTAINER_NAME"
+        "container_name": "VALIDATORS_CONTAINER_NAME"
+    },
+    "rest_apis": {
+        "insert_middle_elements": {
+            "params": {
+                "foreign_keys": {
+                    "sub_validators": {
+                        "middle_container": "validator_sub_validators",
+                        "parent_field": "uuid"
+                    }
+                }
+            }
+        }
     },
     "routes": {
         "http": [
             {
                 "pattern": "/",
                 "method": "post",
-                "rest_api": "insert_element"
+                "rest_api": "insert_middle_elements"
             },
             {
                 "pattern": "/*uuid*",

@@ -1,10 +1,10 @@
 {
-    "name": "apis-irestful-environment-variables",
+    "name": "apis-irestful-rendered-parsers",
     "parents": [
         "http://code.irestful.com/configs/parent/crud.json"
     ],
     "environment_variables": {
-        "container_name": "ENVIRONMENT_VARIABLES_CONTAINER_NAME"
+        "container_name": "RENDERED_PARSERS_CONTAINER_NAME"
     },
     "routes": {
         "http": [

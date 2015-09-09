@@ -19,7 +19,7 @@ final class ConcreteFunctionCodeAdapter implements FunctionCodeAdapter {
 
                 $output[$keyname] = $this->convertDataToFunctionCode($oneData);
             } catch(\Exception $exception) {
-                throw new \Exception('The given view was: '.$keyname, 0, $exception);
+                throw new \Exception('The given function was: '.$keyname, 0, $exception);
             }
 
         }

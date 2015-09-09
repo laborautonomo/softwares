@@ -7,7 +7,6 @@ function saveNewSoftware($configUrl) {
     $uri = '/';
 
     $output = executeCurlRequest($host, 'post', $uri, $data);
-
     if ($output['http_code'] != 200) {
         throw new \Exception('There was a problem while saving a software in the datastore.  Output: '.print_r($output, true));
     }

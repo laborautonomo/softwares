@@ -34,7 +34,9 @@ final class ConcreteParamAdapter implements ParamAdapter {
 
 
             } catch (\Exception $exception) {
-                throw new \Exception('The param keyname is: '.$keyname, 0, $exception);
+
+                $param = new ConcreteParam($value);
+                $output[$keyname] = $param;
             }
 
         }

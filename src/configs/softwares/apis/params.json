@@ -1,0 +1,54 @@
+{
+    "name": "apis-irestful-params",
+    "parents": [
+        "http://code.irestful.com/configs/parent/crud.json"
+    ],
+    "environment_variables": {
+        "container_name": "PARAMS_CONTAINER_NAME"
+    },
+    "functions": {
+        "insert_params": {
+            "url": "http://code.irestful.com/softwares/apis/irestful/params/rest_apis/create_params.hh",
+            "name": "createParams",
+            "language": "hack"
+        }
+    },
+    "logic": {
+        "insert_element": {
+            "params": {
+                "software_name": "*environment_variables->apis_irestful_software_name*",
+                "container_name": "*environment_variables->container_name*"
+            }
+        }
+    },
+    "rest_apis": {
+        "insert_params": {
+            "function": "insert_params",
+            "params": {
+                "data": "*request->request*"
+            },
+            "sub_logics": {
+                "insert_element": "insert_element"
+            }
+        }
+    },
+    "routes": {
+        "http": [
+            {
+                "pattern": "/",
+                "method": "post",
+                "rest_api": "insert_params"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "get",
+                "rest_api": "retrieve_element_by_uuid"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "delete",
+                "rest_api": "delete_element"
+            }
+        ]
+    }
+}

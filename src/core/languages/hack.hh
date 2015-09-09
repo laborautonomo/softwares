@@ -55,18 +55,30 @@ $cachePath = '../cache';
 
 $includeCode = function(string $name, string $code) use($cachePath) {
 
+    $generateRandomString = function($length = 200) {
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    };
+
     if (function_exists($name)) {
         return $name;
     }
 
+    $randomName = $generateRandomString();
+    $code = str_replace('function '.$name, 'function '.$randomName, $code);
     $hash = md5($code);
-    $fileName = $cachePath.'/'.$hash.'.hh';
+    $filePath = $cachePath.'/'.$hash.'.hh';
 
-    file_put_contents($fileName, $code);
-    include_once($fileName);
-    //unlink($fileName);
+    file_put_contents($filePath, $code);
+    include_once($filePath);
+    unlink($filePath);
 
-    return $name;
+    return $randomName;
 
 };
 
@@ -206,7 +218,7 @@ $processView = function(mixed $input, array $view) use($createView, &$processVie
 
 };
 
-$processParam = function(Map<string, mixed> $params) use($createRenderedParser, &$processParam) {
+$processParam = function(Map<string, mixed> $params = null) use($createRenderedParser, &$processParam) {
 
     $convertToMap = function(array $data) use(&$convertToMap) {
 
@@ -223,6 +235,10 @@ $processParam = function(Map<string, mixed> $params) use($createRenderedParser, 
         return $output;
 
     };
+
+    if (is_null($params)) {
+        return null;
+    }
 
     $output = Map<string, mixed> {};
     foreach($params as $keyname => $oneParam) {

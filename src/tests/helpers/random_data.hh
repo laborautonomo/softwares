@@ -1,6 +1,268 @@
 <?hh
 include_once('src/shared/logics/uuid.hh');
 
+function getLogicsData(array $functionsData, $index, array $params = null, array $subLogics = null) {
+
+    $paramUuids = array();
+    if (!empty($params)) {
+
+        foreach($params as $oneParam) {
+            $paramUuids[] = $oneParam['uuid'];
+        }
+
+    }
+
+    $subLogicUuids = array();
+    if (!empty($subLogics)) {
+
+        foreach($subLogics as $oneSubLogic) {
+            $subLogicUuids[] = $oneSubLogic['uuid'];
+        }
+
+    }
+
+    if ($index % 2) {
+
+        $data = array(
+            'uuid' => generateUuid(),
+            'function' => $functionsData['uuid'],
+            'title' => 'This is the logic title',
+            'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+        if (!empty($paramUuids)) {
+            $data['params'] = $paramUuids;
+        }
+
+        if (!empty($subLogicUuids)) {
+            $data['sub_logics'] = $subLogicUuids;
+        }
+
+        return $data;
+
+    }
+
+    $data = array(
+        'uuid' => generateUuid(),
+        'function' => $functionsData['uuid'],
+        'title' => 'This is the second logic title',
+        'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+
+    if (!empty($paramUuids)) {
+        $data['params'] = $paramUuids;
+    }
+
+    if (!empty($subLogicUuids)) {
+        $data['sub_logics'] = $subLogicUuids;
+    }
+
+    return $data;
+
+
+}
+
+function getValidatorsData(array $functionsData, $index, array $view = null, array $renderedParser = null, array $subValidators = null) {
+
+    $subValidatorUuids = array();
+    if (!empty($subValidators)) {
+
+        foreach($subValidators as $oneValidator) {
+            $subValidatorUuids[] = $oneValidator['uuid'];
+        }
+
+    }
+
+    if ($index % 2) {
+
+        $data = array(
+            'uuid' => generateUuid(),
+            'function' => $functionsData['uuid'],
+            'title' => 'This is the validator title',
+            'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+        if (!empty($view)) {
+            $data['view'] = $view['uuid'];
+        }
+
+        if (!empty($renderedParser)) {
+            $data['rendered_parser'] = $renderedParser['uuid'];
+        }
+
+        if (!empty($subViewUuids)) {
+            $data['sub_validators'] = $subValidatorUuids;
+        }
+
+        return $data;
+
+    }
+
+    $data = array(
+        'uuid' => generateUuid(),
+        'function' => $functionsData['uuid'],
+        'title' => 'This is the second validator title',
+        'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+
+    if (!empty($view)) {
+        $data['view'] = $view['uuid'];
+    }
+
+    if (!empty($renderedParser)) {
+        $data['rendered_parser'] = $renderedParser['uuid'];
+    }
+
+    if (!empty($subViewUuids)) {
+        $data['sub_validators'] = $subValidatorUuids;
+    }
+
+    return $data;
+
+
+}
+
+function getSubViewsData(array $parentView, array $childView, $index) {
+
+    if ($index % 2) {
+
+        return array(
+            'uuid' => generateUuid(),
+            'parent' => $parentView['uuid'],
+            'child' => $childView['uuid'],
+            'created_on' => time()
+        );
+
+    }
+
+    return array(
+        'uuid' => generateUuid(),
+        'parent' => $parentView['uuid'],
+        'child' => $childView['uuid'],
+        'created_on' => time()
+    );
+
+}
+
+function getViewsData(array $functionsData, $index, array $view = null, array $subViews = null) {
+
+    $subViewUuids = array();
+    if (!empty($subViews)) {
+
+        foreach($subViews as $oneView) {
+            $subViewUuids[] = $oneView['uuid'];
+        }
+
+    }
+
+    if ($index % 2) {
+
+        $data = array(
+            'uuid' => generateUuid(),
+            'function' => $functionsData['uuid'],
+            'title' => 'This is the view title',
+            'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+        if (!empty($view)) {
+            $data['view'] = $view['uuid'];
+        }
+
+        if (!empty($subViewUuids)) {
+            $data['sub_views'] = $subViewUuids;
+        }
+
+        return $data;
+
+    }
+
+    $data = array(
+        'uuid' => generateUuid(),
+        'function' => $functionsData['uuid'],
+        'title' => 'This is the second view title',
+        'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+
+    if (!empty($view)) {
+        $data['view'] = $view['uuid'];
+    }
+
+    if (!empty($subViewUuids)) {
+        $data['sub_views'] = $subViewUuids;
+    }
+
+    return $data;
+
+
+}
+
+
+function getParamsData($variableName = null, $variableDelimiter = null, $value = null, array $renderedParser = null, array $validator = null) {
+
+    $data = array(
+        'uuid' => generateUuid(),
+        'variable_name' => null,
+        'variable_delimiter' => null,
+        'value' => null,
+        'rendered_parser' => null,
+        'validator' => null,
+        'created_on' => time()
+    );
+
+    if (!empty($variableName)) {
+        $data['variable_name'] = $variableName;
+    }
+
+    if (!empty($variableDelimiter)) {
+        $data['variable_delimiter'] = $variableDelimiter;
+    }
+
+    if (!empty($value)) {
+        $data['value'] = $value;
+    }
+
+    if (!empty($renderedParser)) {
+        $data['rendered_parser'] = $renderedParser;
+    }
+
+    if (!empty($validator)) {
+        $data['validator'] = $validator;
+    }
+
+    return $data;
+
+}
+
+function getRenderedParserData(array $functionsData, $index) {
+
+    if ($index % 2) {
+
+        return array(
+            'uuid' => generateUuid(),
+            'function' => $functionsData['uuid'],
+            'title' => 'This is the function title',
+            'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+    }
+
+    return array(
+        'uuid' => generateUuid(),
+        'function' => $functionsData['uuid'],
+        'title' => 'This is the second function title',
+        'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+
+}
+
 function getSettingsData($index) {
 
     if ($index % 2) {

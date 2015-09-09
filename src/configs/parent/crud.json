@@ -7,6 +7,16 @@
         "apis_irestful_software_name": "APIS_IRESTFUL_SOFTWARE_NAME"
     },
     "functions": {
+        "insert_middle_elements": {
+            "url": "http://code.irestful.com/shared/softwares/datastore/rest_apis/elements/insert_middle_elements.hh",
+            "name": "insertMiddleElements",
+            "language": "hack"
+        },
+        "logic_generate_uuid": {
+            "url": "http://code.irestful.com/shared/logics/uuid.hh",
+            "name": "generateUuid",
+            "language": "hack"
+        },
         "validator_regex_match": {
             "url": "http://code.irestful.com/shared/validators/regex_match.hh",
             "name": "match",
@@ -44,25 +54,50 @@
             }
         }
     },
-    "rest_apis": {
+    "logic": {
+        "generate_uuid": {
+            "function": "logic_generate_uuid"
+        },
         "insert_element": {
+            "params": {
+                "software_name": "*environment_variables->apis_irestful_software_name*",
+                "container_name": "*environment_variables->container_name*"
+            }
+        },
+        "retrieve_element_by_uuid": {
+            "params": {
+                "software_name": "*environment_variables->apis_irestful_software_name*",
+                "container_name": "*environment_variables->container_name*"
+            }
+        }
+    },
+    "rest_apis": {
+        "insert_middle_elements": {
+            "function": "insert_middle_elements",
             "params": {
                 "software_name": "*environment_variables->apis_irestful_software_name*",
                 "container_name": "*environment_variables->container_name*",
                 "data": "*request->request*"
+            },
+            "sub_logics": {
+                "insert_element": "insert_element",
+                "generate_uuid": "generate_uuid"
             }
         },
-        "delete_element": {
+        "insert_element": {
             "params": {
-                "software_name": "*environment_variables->apis_irestful_software_name*",
-                "container_name": "*environment_variables->container_name*",
+                "data": "*request->request*"
+            }
+        },
+        "retrieve_element_by_uuid": {
+            "params": {
                 "uuid": {
                     "input": "*request->query->uuid*",
                     "validator": "uuid"
                 }
             }
         },
-        "retrieve_element_by_uuid": {
+        "delete_element": {
             "params": {
                 "software_name": "*environment_variables->apis_irestful_software_name*",
                 "container_name": "*environment_variables->container_name*",
@@ -77,24 +112,5 @@
         "json": {
             "function": "rendered_parser_json"
         }
-    },
-    "routes": {
-        "http": [
-            {
-                "pattern": "/",
-                "method": "post",
-                "rest_api": "insert_element"
-            },
-            {
-                "pattern": "/*uuid*",
-                "method": "get",
-                "rest_api": "retrieve_element_by_uuid"
-            },
-            {
-                "pattern": "/*uuid*",
-                "method": "delete",
-                "rest_api": "delete_element"
-            }
-        ]
     }
 }

@@ -29,21 +29,7 @@ function crudDelete($subDomain, $baseRoute, string $uuid) {
     }
 }
 
-function preCrud(string $newSoftwareNameInDatastore, string $newSoftwareConfigUrl, array $containerData) {
-
-    //save both our application config files:
-    saveNewSoftware($newSoftwareConfigUrl);
-
-    //create the software container:
-    insertContainerInDatastore($newSoftwareNameInDatastore, $containerData);
-
-}
-
-function crud(\PHPUnit_Framework_TestCase $phpunit, string $baseRoute, string $newSoftwareConfigUrl, array $firstData, $secondData) {
-
-    $newSoftwareJson = file_get_contents($newSoftwareConfigUrl);
-    $newSoftwareData = json_decode($newSoftwareJson, true);
-    $subDomain = $newSoftwareData['name'];
+function interact(\PHPUnit_Framework_TestCase $phpunit, string $baseRoute, string $subDomain, array $data, array $removeKeysInDataBeforeComparing = null) {
 
     $retrieve_Success = function(string $uuid) use($baseRoute, $subDomain) {
         $uri = $baseRoute.$uuid;
@@ -57,13 +43,100 @@ function crud(\PHPUnit_Framework_TestCase $phpunit, string $baseRoute, string $n
         return $retrievedData;
     };
 
+    crudInsert($subDomain, $baseRoute, $data['first']);
+    $retrievedFirstData = $retrieve_Success($data['first']['uuid'], $data['first']);
 
+    if (!empty($removeKeysInDataBeforeComparing)) {
+        foreach($removeKeysInDataBeforeComparing as $oneKeyToRemove) {
+            unset($data['first'][$oneKeyToRemove]);
+        }
+    }
 
-    //interact:
-    crudInsert($subDomain, $baseRoute, $firstData);
-    $retrievedFirstData = $retrieve_Success($firstData['uuid'], $firstData);
-    $phpunit->assertEquals($firstData, $retrievedFirstData);
+    $phpunit->assertEquals($data['first'], $retrievedFirstData);
+    crudDelete($subDomain, $baseRoute, $data['first']['uuid']);
 
-    crudDelete($subDomain, $baseRoute, $firstData['uuid']);
+}
 
+function crud(\PHPUnit_Framework_TestCase $phpunit, string $baseRoute, array $dependencies, string $softwareNameInDatastore, string $softwareConfigUrl, array $containerData, array $data, array $preAdditionalData = null, array $postAdditionalContainerData = null, array $removeKeysInDataBeforeComparing = null) {
+
+    //create the dependency softwares:
+    $subDomains = array();
+    $configUrls = array_keys($dependencies);
+    foreach($configUrls as $oneConfigUrl) {
+        $subDomains[$oneConfigUrl] = getSubdomainNameFromSoftwareConfigUrl($oneConfigUrl);
+        saveNewSoftware($oneConfigUrl);
+    }
+
+    //discover the software subdomain:
+    $softwareJson = file_get_contents($softwareConfigUrl);
+    $softwareData = json_decode($softwareJson, true);
+
+    //create the software, in our datastore:
+    insertSoftwareInDatastore($softwareNameInDatastore);
+
+    //insert our dependencies container (in datastore) & data:
+    foreach($dependencies as $oneConfigUrl => $oneDependencyData) {
+
+        if (empty($oneDependencyData)) {
+            continue;
+        }
+
+        insertContainerInDatastore($softwareNameInDatastore, $oneDependencyData['container_data']);
+        crudInsert($subDomains[$oneConfigUrl], $oneDependencyData['base_route'], $oneDependencyData['data']);
+    }
+
+    //save both our application config files:
+    saveNewSoftware($softwareConfigUrl);
+
+    //create the software container:
+    insertContainerInDatastore($softwareNameInDatastore, $containerData);
+
+    //if we have pre container data, insert it:
+    if (!empty($postAdditionalContainerData)) {
+        foreach($postAdditionalContainerData as $oneContainerData) {
+            insertContainerInDatastore($softwareNameInDatastore, $oneContainerData);
+        }
+    }
+
+    //if we have pre data, insert it:
+    if (!empty($preAdditionalData)) {
+        foreach($preAdditionalData as $oneData) {
+            crudInsert($softwareData['name'], $baseRoute, $oneData);
+        }
+    }
+
+    //interact with functions:
+    interact($phpunit, $baseRoute, $softwareData['name'], $data, $removeKeysInDataBeforeComparing);
+
+    //if we have pre data, delete it:
+    if (!empty($preAdditionalData)) {
+        foreach($preAdditionalData as $oneData) {
+            crudDelete($softwareData['name'], $baseRoute, $oneData['uuid']);
+        }
+    }
+
+    //if we have pre container data, delete it:
+    if (!empty($postAdditionalContainerData)) {
+        foreach($postAdditionalContainerData as $oneContainerData) {
+            deleteContainerFromDatastore($softwareNameInDatastore, $oneContainerData['name']);
+        }
+    }
+
+    //delete container:
+    deleteContainerFromDatastore($softwareNameInDatastore, $containerData['name']);
+
+    //delete dependencies container:
+    $reversedDependencies = array_reverse($dependencies);
+    foreach($reversedDependencies as $oneConfigUrl => $oneDependencyData) {
+
+        if (empty($oneDependencyData)) {
+            continue;
+        }
+
+        crudDelete($subDomains[$oneConfigUrl], $oneDependencyData['base_route'], $oneDependencyData['data']['uuid']);
+        deleteContainerFromDatastore($softwareNameInDatastore, $oneDependencyData['container_data']['name']);
+    }
+
+    //delete the software from datastore:
+    deleteSoftwareFromDatastore($softwareNameInDatastore);
 }

@@ -1,6 +1,118 @@
 <?hh
 include_once('src/shared/logics/uuid.hh');
 
+function getRESTAPIsData(array $functionsData, $index, array $successAPI = null, array $failureAPI = null, array $view = null, array $renderedParser = null, array $params = null, array $subRestAPIs = null, array $subLogics = null) {
+
+    $paramUuids = array();
+    if (!empty($params)) {
+
+        foreach($params as $oneParam) {
+            $paramUuids[] = $oneParam['uuid'];
+        }
+
+    }
+
+    $subRestAPIsUuids = array();
+    if (!empty($subRestAPIs)) {
+
+        foreach($subRestAPIs as $oneSubRestAPI) {
+            $subRestAPIsUuids[] = $oneSubRestAPI['uuid'];
+        }
+
+    }
+
+    $subLogicUuids = array();
+    if (!empty($subLogics)) {
+
+        foreach($subLogics as $oneSubLogic) {
+            $subLogicUuids[] = $oneSubLogic['uuid'];
+        }
+
+    }
+
+    if ($index % 2) {
+
+        $data = array(
+            'uuid' => generateUuid(),
+            'function' => $functionsData['uuid'],
+            'title' => 'This is the REST API title',
+            'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+            'created_on' => time()
+        );
+
+        if (!empty($view)) {
+            $data['view'] = $view['uuid'];
+        }
+
+        if (!empty($renderedParser)) {
+            $data['rendered_parser'] = $renderedParser['uuid'];
+        }
+
+        if (!empty($successAPI)) {
+            $data['success_api_rest_api'] = $successAPI['uuid'];
+        }
+
+        if (!empty($failureAPI)) {
+            $data['failure_api_rest_api'] = $failureAPI['uuid'];
+        }
+
+        if (!empty($subRestAPIs)) {
+            $data['sub_rest_apis'] = $subRestAPIs;
+        }
+
+        if (!empty($paramUuids)) {
+            $data['params'] = $paramUuids;
+        }
+
+        if (!empty($subLogicUuids)) {
+            $data['sub_logics'] = $subLogicUuids;
+        }
+
+        return $data;
+
+    }
+
+    $data = array(
+        'uuid' => generateUuid(),
+        'function' => $functionsData['uuid'],
+        'title' => 'This is the second REST API title',
+        'description' => ' Pellentesque elit massa, vehicula eget nisi sed, aliquam tempus magna. In quis blandit ipsum. Integer tempor eros sapien, laoreet facilisis est congue et. Ut vestibulum vehicula nisl vitae tincidunt. Sed aliquet arcu eu augue laoreet vulputate. Nullam tincidunt, purus et laoreet fringilla, felis turpis condimentum nulla, a finibus ipsum mauris at ex. Morbi consectetur sem tortor, ut tincidunt sem volutpat in. ',
+        'created_on' => time()
+    );
+
+    if (!empty($view)) {
+        $data['view'] = $view['uuid'];
+    }
+
+    if (!empty($renderedParser)) {
+        $data['rendered_parser'] = $renderedParser['uuid'];
+    }
+
+    if (!empty($successAPI)) {
+        $data['success_api_rest_api'] = $successAPI['uuid'];
+    }
+
+    if (!empty($failureAPI)) {
+        $data['failure_api_rest_api'] = $failureAPI['uuid'];
+    }
+
+    if (!empty($paramUuids)) {
+        $data['sub_rest_apis'] = $subRestAPIsUuids;
+    }
+
+    if (!empty($paramUuids)) {
+        $data['params'] = $paramUuids;
+    }
+
+    if (!empty($subLogicUuids)) {
+        $data['sub_logics'] = $subLogicUuids;
+    }
+
+    return $data;
+
+
+}
+
 function getLogicsData(array $functionsData, $index, array $params = null, array $subLogics = null) {
 
     $paramUuids = array();

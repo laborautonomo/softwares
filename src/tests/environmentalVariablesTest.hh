@@ -24,8 +24,7 @@ final class environmentVariablesTest extends \PHPUnit_Framework_TestCase {
             'second' => getEnvironmentVariablesData(1)
         );
     }
-
-//awOddWlV
+    
     public function tearDown() {
 
     }

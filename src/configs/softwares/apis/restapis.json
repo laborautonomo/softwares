@@ -1,0 +1,50 @@
+{
+    "name": "apis-irestful-restapis",
+    "parents": [
+        "http://code.irestful.com/configs/parent/crud.json"
+    ],
+    "environment_variables": {
+        "container_name": "REST_APIS_CONTAINER_NAME"
+    },
+    "rest_apis": {
+        "insert_middle_elements": {
+            "params": {
+                "foreign_keys": {
+                    "sub_rest_apis": {
+                        "middle_container": "restapis_sub_restapis",
+                        "parent_field": "uuid"
+                    },
+                    "sub_logics": {
+                        "middle_container": "restapis_sub_logics",
+                        "parent_field": "uuid"
+                    },
+                    "params": {
+                        "middle_container": "restapis_params",
+                        "parent_field": "uuid"
+                    }
+                }
+            }
+
+
+        }
+    },
+    "routes": {
+        "http": [
+            {
+                "pattern": "/",
+                "method": "post",
+                "rest_api": "insert_middle_elements"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "get",
+                "rest_api": "retrieve_element_by_uuid"
+            },
+            {
+                "pattern": "/*uuid*",
+                "method": "delete",
+                "rest_api": "delete_element"
+            }
+        ]
+    }
+}

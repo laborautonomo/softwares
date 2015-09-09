@@ -1,4 +1,434 @@
 <?hh
+function getRestAPIsParams() {
+    return array(
+        'name' => 'restapis_params',
+        'fields' => array(
+            'uuid' => array(
+                'is_primary_key' => true,
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'parent' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'rest_apis',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'child' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'params',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'created_on' => array(
+                'type' => 'bigint',
+                'length' => 11,
+                'default' => 'not null'
+            )
+        )
+    );
+}
+
+function getRestAPIsSubLogics() {
+    return array(
+        'name' => 'restapis_sub_logics',
+        'fields' => array(
+            'uuid' => array(
+                'is_primary_key' => true,
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'parent' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'rest_apis',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'child' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'logics',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'created_on' => array(
+                'type' => 'bigint',
+                'length' => 11,
+                'default' => 'not null'
+            )
+        )
+    );
+}
+
+
+function getRestAPIsSubRestAPIs() {
+    return array(
+        'name' => 'restapis_sub_restapis',
+        'fields' => array(
+            'uuid' => array(
+                'is_primary_key' => true,
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'parent' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'rest_apis',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'child' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'rest_apis',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'created_on' => array(
+                'type' => 'bigint',
+                'length' => 11,
+                'default' => 'not null'
+            )
+        )
+    );
+}
+
+function getRestAPIsContainerData() {
+    return array(
+        'name' => 'rest_apis',
+        'fields' => array(
+            'uuid' => array(
+                'is_primary_key' => true,
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'function' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'functions',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'not null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'view' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'views',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'rendered_parser' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'rendered_parsers',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'success_api_rest_api' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'rest_apis',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'failure_api_rest_api' => array(
+                'foreign_key' => array(
+                    'referenced_container' => 'rest_apis',
+                    'referenced_field' => 'uuid'
+                ),
+                'type' => 'binary',
+                'length' => 16,
+                'default' => 'null',
+                'validator' => array(
+                    'language' => array(
+                        'name' => 'hack',
+                        'host' => 'http://hack.languages.irestful.com',
+                        'port' => 80
+                    ),
+                    'function' => array(
+                        'url' => 'http://code.irestful.com/shared/validators/uuid.hh',
+                        'name' => 'uuid',
+                        'language' => 'hack'
+                    ),
+                    'rendered_parser' => array(
+                        'url' => 'http://code.irestful.com/shared/rendered_parsers/uuid.hh',
+                        'name' => 'uuid'
+                    )
+                )
+            ),
+            'title' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'default' => 'not null'
+            ),
+            'description' => array(
+                'type' => 'text',
+                'default' => 'null'
+            ),
+            'created_on' => array(
+                'type' => 'bigint',
+                'length' => 11,
+                'default' => 'not null'
+            ),
+            'last_updated_on' => array(
+                'type' => 'bigint',
+                'length' => 11,
+                'default' => 'null'
+            )
+        )
+    );
+}
+
 function getLogicsParams() {
     return array(
         'name' => 'logics_params',
